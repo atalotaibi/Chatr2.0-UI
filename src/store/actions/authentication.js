@@ -9,7 +9,18 @@ const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
 
-const setAuthToken = token => {};
+const setAuthToken = token => {
+  return dispatch => {
+    if (token) {
+      axios.defaults.headers.common.Authorization = `JWT ${token}`;
+      const decodedUser = jwt_decode(token);
+      dispatch(setCurrentUser(decodedUser));
+    } else {
+      delete axios.defaults.headers.common.Authorization;
+      dispatch(setCurrentUser());
+    }
+  };
+};
 
 export const checkForExpiredToken = () => {};
 
