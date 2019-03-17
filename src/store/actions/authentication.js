@@ -67,7 +67,9 @@ export const signup = userData => {
   };
 };
 
-export const logout = () => {};
+export const logout = () => {
+  setAuthToken();
+};
 
 const setCurrentUser = user => ({
   type: actionTypes.SET_CURRENT_USER,
