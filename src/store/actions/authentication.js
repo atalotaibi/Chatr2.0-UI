@@ -10,36 +10,32 @@ const instance = axios.create({
 });
 
 const setAuthToken = token => {
-  return dispatch => {
-    if (token) {
-      axios.defaults.headers.common.Authorization = `JWT ${token}`;
-      const decodedUser = jwt_decode(token);
-      dispatch(setCurrentUser(decodedUser));
-      localStorage.setItem("myToken", token);
-    } else {
-      delete axios.defaults.headers.common.Authorization;
-      dispatch(setCurrentUser());
-    }
-  };
+  if (token) {
+    axios.defaults.headers.common.Authorization = `JWT ${token}`;
+    const decodedUser = jwt_decode(token);
+    localStorage.setItem("myToken", token);
+    return setCurrentUser(decodedUser);
+  } else {
+    localStorage.removeItem("myToken");
+    delete axios.defaults.headers.common.Authorization;
+  }
 };
 
 export const checkForExpiredToken = () => {
-  return dispatch => {
-    // Get token
-    const token = localStorage.getItem("myToken");
-    if (token) {
-      const currentTime = Date.now() / 1000;
-      // Decode token and get user info
-      const user = jwt_decode(token);
-      // Check token expiration
-      if (user.exp >= currentTime) {
-        // Set auth token header
-        setAuthToken(token);
-      } else {
-        dispatch(logout());
-      }
+  // Get token
+  const token = localStorage.getItem("myToken");
+  if (token) {
+    const currentTime = Date.now() / 1000;
+    // Decode token and get user info
+    const user = jwt_decode(token);
+    // Check token expiration
+    if (user.exp >= currentTime) {
+      // Set auth token header
+      return setAuthToken(token);
+    } else {
+      return logout();
     }
-  };
+  }
 };
 
 export const login = (userData, history) => {
@@ -71,6 +67,7 @@ export const signup = (userData, history) => {
 
 export const logout = () => {
   setAuthToken();
+  return setCurrentUser();
 };
 
 const setCurrentUser = user => ({
