@@ -54,7 +54,18 @@ export const login = userData => {
   };
 };
 
-export const signup = userData => {};
+export const signup = userData => {
+  let user;
+  return async dispatch => {
+    try {
+      let res = await instance.post("/signup/", userData);
+      user = res.data;
+    } catch (error) {
+      console.error(err.response.data);
+    }
+    dispatch(setAuthToken(user.token));
+  };
+};
 
 export const logout = () => {};
 
