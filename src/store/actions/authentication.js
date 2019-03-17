@@ -42,7 +42,17 @@ export const checkForExpiredToken = () => {
   };
 };
 
-export const login = userData => {};
+export const login = userData => {
+  return async dispatch => {
+    try {
+      let response = await instance.post("/login/", userData);
+      let user = await response.data;
+      dispatch(setAuthToken(user.token));
+    } catch (err) {
+      console.log("An error occurred.", err);
+    }
+  };
+};
 
 export const signup = userData => {};
 
