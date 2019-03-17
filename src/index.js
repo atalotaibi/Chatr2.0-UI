@@ -15,8 +15,6 @@ import App from "./App";
 // Store
 import store from "./store";
 
-store.dispatch(checkForExpiredToken());
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

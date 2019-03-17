@@ -42,28 +42,30 @@ export const checkForExpiredToken = () => {
   };
 };
 
-export const login = userData => {
+export const login = (userData, history) => {
   return async dispatch => {
     try {
-      let response = await instance.post("/login/", userData);
+      let response = await instance.post("login/", userData);
       let user = response.data;
       dispatch(setAuthToken(user.token));
-    } catch (err) {
-      console.log("An error occurred.", err);
+      history.push("/welcome");
+    } catch (errors) {
+      console.log("An error occurred.", errors);
     }
   };
 };
 
-export const signup = userData => {
+export const signup = (userData, history) => {
   let user;
   return async dispatch => {
     try {
-      let res = await instance.post("/signup/", userData);
+      let res = await instance.post("signup/", userData);
       user = res.data;
     } catch (error) {
-      console.error(err.response.data);
+      console.error(error.response.data);
     }
     dispatch(setAuthToken(user.token));
+    history.push("/welcome");
   };
 };
 
