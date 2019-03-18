@@ -22,20 +22,22 @@ const setAuthToken = token => {
 };
 
 export const checkForExpiredToken = () => {
-  // Get token
-  const token = localStorage.getItem("myToken");
-  if (token) {
-    const currentTime = Date.now() / 1000;
-    // Decode token and get user info
-    const user = jwt_decode(token);
-    // Check token expiration
-    if (user.exp >= currentTime) {
-      // Set auth token header
-      return setAuthToken(token);
-    } else {
-      return logout();
+  return dispatch => {
+    // Get token
+    const token = localStorage.getItem("myToken");
+    if (token) {
+      const currentTime = Date.now() / 1000;
+      // Decode token and get user info
+      const user = jwt_decode(token);
+      // Check token expiration
+      if (user.exp >= currentTime) {
+        // Set auth token header
+        dispatch(setAuthToken(token));
+      } else {
+        dispatch(logout());
+      }
     }
-  }
+  };
 };
 
 export const login = (userData, history) => {
@@ -44,9 +46,9 @@ export const login = (userData, history) => {
       let response = await instance.post("login/", userData);
       let user = response.data;
       dispatch(setAuthToken(user.token));
-      history.push("/welcome");
+      history.push("/private");
     } catch (errors) {
-      console.log("An error occurred.", errors);
+      dispatch(setErrors(errors.response.data));
     }
   };
 };
@@ -57,11 +59,11 @@ export const signup = (userData, history) => {
     try {
       let res = await instance.post("signup/", userData);
       user = res.data;
-    } catch (error) {
-      console.error(error.response.data);
+    } catch (errors) {
+      dispatch(setErrors(errors.response.data));
     }
     dispatch(setAuthToken(user.token));
-    history.push("/welcome");
+    history.push("/private");
   };
 };
 

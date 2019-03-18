@@ -1,11 +1,18 @@
 import { SET_ERRORS } from "../actions/actionTypes";
 
-const initialState = {};
+const initialState = {
+  errors: []
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ERRORS:
-      return action.payload;
+      return {
+        ...state,
+        errors: Object.keys(action.payload).map(
+          key => `${key}: ${action.payload[key]}`
+        )
+      };
     default:
       return state;
   }

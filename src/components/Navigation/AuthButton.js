@@ -14,7 +14,6 @@ import {
 class AuthButton extends Component {
   render() {
     const user = this.props.user;
-    // const user = { username: "Mr Potato" };
     let buttons = [
       <li key="loginButton" className="nav-item">
         <Link to="/login" className="nav-link">

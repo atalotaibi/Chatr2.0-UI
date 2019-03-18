@@ -21,10 +21,12 @@ class RegistationForm extends Component {
     } else {
       this.props.signup(this.state, this.props.history);
     }
+    console.log(this.props.errors.username);
   };
 
   render() {
     const type = this.props.match.url.substring(1);
+    const errors = this.props.errors;
 
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
@@ -35,6 +37,13 @@ class RegistationForm extends Component {
               : "Register an account"}
           </h5>
           <form onSubmit={this.submitHandler}>
+            {!!errors.length && (
+              <div className="alert alert-danger" role="alert">
+                {errors.map(error => (
+                  <p key={error}>{error}</p>
+                ))}
+              </div>
+            )}
             <div className="form-group">
               <input
                 className="form-control"
@@ -75,6 +84,12 @@ class RegistationForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errors: state.errors.errors
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     login: (userData, history) =>
@@ -85,6 +100,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RegistationForm);

@@ -12,12 +12,12 @@ import PrivateRoute from "./components/PrivateRoute";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
-import * as actionCreators from "./store/actions/index";
+import * as actionCreators from "./store/actions";
 
 class App extends Component {
   componentDidMount() {
-    this.props.checkForExpiredToken();
     main();
+    this.props.checkForExpiredToken();
   }
 
   render() {
