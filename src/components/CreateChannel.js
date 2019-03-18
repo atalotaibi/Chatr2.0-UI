@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actionCreators from "./store/actions/index";
+import * as actionCreators from "../store/actions";
 
 class CreateChannel extends Component {
   state = {
@@ -14,7 +14,7 @@ class CreateChannel extends Component {
   //     if (this.props.errors.length) this.props.resetErrors();
   //   }
 
-  submitAuthor = event => {
+  createChannel = event => {
     event.preventDefault();
     this.props.postChannel(this.state);
   };
@@ -24,7 +24,7 @@ class CreateChannel extends Component {
 
     return (
       <div className="mt-5 p-2">
-        <form onSubmit={this.submitAuthor}>
+        <form onSubmit={this.createChannel}>
           {/* {!!errors.length && (
             <div className="alert alert-danger" role="alert">
               {errors.map(error => (
