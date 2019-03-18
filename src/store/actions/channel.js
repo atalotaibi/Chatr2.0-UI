@@ -19,7 +19,7 @@ export const postMessage = (message, channelID) => {
         payload: newMessage
       });
     } catch (error) {
-      console.error(error.response.data);
+      // console.error(error.res.data);
     }
   };
 };
