@@ -6,7 +6,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.POST_BOOK:
+    case actionTypes.POST_MESSAGE:
       return {
         ...state,
         channel: {

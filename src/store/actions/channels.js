@@ -10,10 +10,10 @@ export const postChannel = channel => {
   return async dispatch => {
     try {
       const res = await instance.post("channels/create/", channel);
-      const newAuthor = res.data;
+      const newChannel = res.data;
       dispatch({
         type: actionTypes.POST_CHANNEL,
-        payload: newAuthor
+        payload: newChannel
       });
     } catch (error) {
       console.error(error.response.data);

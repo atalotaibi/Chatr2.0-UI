@@ -8,8 +8,7 @@ const instance = axios.create({
 
 export const postMessage = (message, channelID) => {
   message = {
-    ...message,
-    channels: [channelID]
+    ...message
   };
   return async dispatch => {
     try {
