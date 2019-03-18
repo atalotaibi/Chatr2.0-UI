@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/index";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,38 +13,52 @@ import {
 
 class AuthButton extends Component {
   render() {
-    // const { user } = this.props;
-    const user = { username: "Mr Potato" };
-    let buttons = (
-      <li className="nav-item">
-        <span className="nav-link">
-          <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-        </span>
+    const user = this.props.user;
+    let buttons = [
+      <li key="loginButton" className="nav-item">
+        <Link to="/login" className="nav-link">
+          <FontAwesomeIcon icon={faSignInAlt} /> Login
+        </Link>
+      </li>,
+      <li key="signupButton" className="nav-item">
+        <Link to="/signup" className="nav-link">
+          <FontAwesomeIcon icon={faUserPlus} /> Signup
+        </Link>
       </li>
-    );
+    ];
 
-    if (!user) {
-      buttons = [
-        <li key="loginButton" className="nav-item">
-          <Link to="/login" className="nav-link">
-            <FontAwesomeIcon icon={faSignInAlt} /> Login
-          </Link>
-        </li>,
-        <li key="signupButton" className="nav-item">
-          <Link to="/signup" className="nav-link">
-            <FontAwesomeIcon icon={faUserPlus} /> Signup
-          </Link>
+    if (user) {
+      buttons = (
+        <li className="nav-item">
+          <span className="nav-link" onClick={() => this.props.logout()}>
+            <span className="navbar-text">{user.username}</span>
+            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+          </span>
         </li>
-      ];
+      );
     }
 
-    return (
-      <ul className="navbar-nav ml-auto">
-        <span className="navbar-text">{user.username}</span>
-        {buttons}
-      </ul>
-    );
+    return <ul className="navbar-nav ml-auto">{buttons}</ul>;
   }
 }
 
-export default AuthButton;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (userData, history) =>
+      dispatch(actionCreators.login(userData, history)),
+    signup: (userData, history) =>
+      dispatch(actionCreators.signup(userData, history)),
+    logout: () => dispatch(actionCreators.logout())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthButton);
