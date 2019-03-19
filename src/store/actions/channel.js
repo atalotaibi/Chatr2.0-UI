@@ -15,7 +15,11 @@ export const fetchChannelDetail = channelID => {
         type: actionTypes.FETCH_CHANNEL_DETAIL,
         payload: channel
       });
+
     } catch (error) {}
+
+
+
   };
 };
 

@@ -46,8 +46,8 @@ class SideNav extends React.Component {
                 data-toggle="tooltip"
                 data-placement="right"
               >
-                <Link className="nav-link heading" to="/createChannel">
-                  <span className="nav-link-text mr-2">Channels</span>
+                <Link to="/create" className="nav-link heading">
+                  <span className="nav-link-text ">Channels</span>
                   <FontAwesomeIcon icon={faPlusCircle} />
                 </Link>
               </li>

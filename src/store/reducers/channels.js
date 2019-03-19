@@ -21,14 +21,18 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
+
         filteredChannels: filter
+
       };
 
     case actionTypes.POST_CHANNEL:
       return {
         ...state,
+
         channels: state.channels.concat(action.payload),
         filteredChannels: state.channels.concat(action.payload)
+
       };
     default:
       return state;
