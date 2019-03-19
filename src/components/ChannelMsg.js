@@ -15,12 +15,12 @@ class ChannelMsg extends Component {
   };
   componentDidMount() {
     this.scrollToBottom();
-    setTimeout(
-      () => this.props.fetchChannelDetail(this.props.match.params.channelID),
-      3000
-    );
     this.timer = setInterval(
-      () => this.props.fetchChannelDetail(this.props.match.params.channelID),
+      () =>
+        this.props.fetchChannelDetail(
+          this.props.match.params.channelID,
+          this.getLatestTimestamp()
+        ),
       3000
     );
   }
@@ -31,17 +31,38 @@ class ChannelMsg extends Component {
     ) {
       clearInterval(this.timer);
       this.timer = setInterval(
-        () => this.props.fetchChannelDetail(this.props.match.params.channelID),
+        () =>
+          this.props.fetchChannelDetail(
+            this.props.match.params.channelID,
+            this.getLatestTimestamp()
+          ),
         3000
       );
     }
   }
+  getLatestTimestamp = () => {
+    let channel = this.props.channel;
+    if (channel.length) return channel[channel.length - 1].timestamp;
+    return "";
+    // if (!this.props.user) {
+    //   return null;
+    // } else {
+    //   if (this.props.channel) {
+    //     this.props.channel.forEach(msg => {
+    //       if (!!channel.lengh) {
+    //         this.setState({ timestamp: msg.timestamp });
+    //       }
+    //     });
+    //   }
+    // }
+  };
   getView = () => {
     let msg = "";
     if (!this.props.user) {
       return null;
     } else {
       if (this.props.channel) {
+        console.log(this.props.channel.length);
         msg = this.props.channel.map(msg => <MsgRow key={msg.id} msg={msg} />);
       }
     }
@@ -77,8 +98,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchChannelDetail: channelID =>
-      dispatch(actionCreators.fetchChannelDetail(channelID))
+    fetchChannelDetail: (channelID, timestamp) =>
+      dispatch(actionCreators.fetchChannelDetail(channelID, timestamp))
   };
 };
 

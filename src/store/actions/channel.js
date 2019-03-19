@@ -6,20 +6,18 @@ const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
 
-export const fetchChannelDetail = channelID => {
+export const fetchChannelDetail = (channelID, timestamp) => {
   return async dispatch => {
     try {
-      const res = await instance.get(`channels/${channelID}/`);
+      const res = await instance.get(
+        `channels/${channelID}/?latest=${timestamp}`
+      );
       const channel = res.data;
       dispatch({
         type: actionTypes.FETCH_CHANNEL_DETAIL,
         payload: channel
       });
-
     } catch (error) {}
-
-
-
   };
 };
 
