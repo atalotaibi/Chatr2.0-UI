@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import MsgRow from "./MsgRow";
 
 import { connect } from "react-redux";
-
 import * as actionCreators from "../store/actions";
 import MessageForm from "./MessageForm";
 
