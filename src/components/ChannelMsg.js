@@ -6,10 +6,15 @@ import MsgRow from "./MsgRow";
 import { connect } from "react-redux";
 
 import * as actionCreators from "../store/actions";
+import MessageForm from "./MessageForm";
 
 class ChannelMsg extends Component {
   timer = "";
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
   componentDidMount() {
+    this.scrollToBottom();
     setTimeout(
       () => this.props.fetchChannelDetail(this.props.match.params.channelID),
       3000
@@ -20,6 +25,7 @@ class ChannelMsg extends Component {
     );
   }
   componentDidUpdate(prevProps) {
+    this.scrollToBottom();
     if (
       this.props.match.params.channelID !== prevProps.match.params.channelID
     ) {
@@ -31,11 +37,10 @@ class ChannelMsg extends Component {
     }
   }
   getView = () => {
-    let msg = "you have no messages.";
+    let msg = "";
     if (!this.props.user) {
       return null;
     } else {
-      console.log("hi");
       if (this.props.channel) {
         msg = this.props.channel.map(msg => <MsgRow key={msg.id} msg={msg} />);
       }
@@ -43,7 +48,23 @@ class ChannelMsg extends Component {
     return <tbody>{msg}</tbody>;
   };
   render() {
-    return <table className="msg ml-3">{this.getView()}</table>;
+    const channelID = this.props.match.params.channelID;
+    return (
+      <div>
+        <div className="MessageContainer">
+          <div className="MessagesList">
+            <table className="msg ml-3">{this.getView()}</table>
+          </div>
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+          <MessageForm channelID={channelID} />
+        </div>
+      </div>
+    );
   }
 }
 

@@ -13,7 +13,10 @@ class MessageForm extends Component {
   textChangeHandler = e => this.setState({ [e.target.name]: e.target.value });
   submitMessage = event => {
     event.preventDefault();
-    this.props.postMessage(this.state, this.props.match.params.channelID);
+    this.props.postMessage(this.state, this.props.channelID);
+    this.setState({
+      message: ""
+    });
   };
 
   render() {
