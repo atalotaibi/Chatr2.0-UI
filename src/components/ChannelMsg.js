@@ -35,7 +35,6 @@ class ChannelMsg extends Component {
     if (!this.props.user) {
       return null;
     } else {
-      console.log("hi");
       if (this.props.channel) {
         msg = this.props.channel.map(msg => <MsgRow key={msg.id} msg={msg} />);
       }

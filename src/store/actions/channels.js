@@ -6,7 +6,6 @@ const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
 
-
 export const fetchChannels = () => {
   return async dispatch => {
     try {
@@ -40,4 +39,3 @@ export const postChannel = channel => {
     }
   };
 };
-

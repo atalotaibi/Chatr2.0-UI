@@ -6,7 +6,6 @@ const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
 
-
 export const fetchChannelDetail = channelID => {
   return async dispatch => {
     try {
@@ -16,7 +15,9 @@ export const fetchChannelDetail = channelID => {
         type: actionTypes.FETCH_CHANNEL_DETAIL,
         payload: channel
       });
-    } catch (err) {}
+    } catch (error) {}
+  };
+};
 
 export const postMessage = (message, channelID) => {
   message = {
@@ -33,6 +34,5 @@ export const postMessage = (message, channelID) => {
     } catch (error) {
       // console.error(error.res.data);
     }
-
   };
 };

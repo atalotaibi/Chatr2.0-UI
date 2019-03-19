@@ -13,6 +13,7 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import SearchBar from "./SearchBar";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
@@ -50,6 +51,7 @@ class SideNav extends React.Component {
                   <FontAwesomeIcon icon={faPlusCircle} />
                 </Link>
               </li>
+              <SearchBar />
               {channelLinks}
             </div>
           </ul>
@@ -78,7 +80,7 @@ class SideNav extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    channels: state.channels.channels
+    channels: state.channels.filteredChannels
   };
 };
 const mapDispatchToProps = dispatch => {
