@@ -15,17 +15,24 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.FILTER_CHANNELS:
+      let query = action.payload.toLowerCase();
+      let filter = state.channels.filter(channel => {
+        return `${channel.name}`.toLowerCase().includes(query);
+      });
       return {
         ...state,
-        filteredChannels: state.channels.filter(channel => {
-          return `${channel.name}`.toLowerCase().includes(action.payload);
-        })
+
+        filteredChannels: filter
+
       };
 
     case actionTypes.POST_CHANNEL:
       return {
         ...state,
-        channels: state.channels.concat(action.payload)
+
+        channels: state.channels.concat(action.payload),
+        filteredChannels: state.channels.concat(action.payload)
+
       };
     default:
       return state;
