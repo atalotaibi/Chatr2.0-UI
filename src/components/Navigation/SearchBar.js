@@ -12,15 +12,17 @@ class SearchBar extends Component {
   };
   render() {
     return (
-      <div className="form-group col-lg-6 col-12 mx-auto">
-        <div className="input-group my-3">
+      <div className="card-header">
+        <div className="input-group">
           <input
-            className="form-control"
             type="text"
+            placeholder="Search..."
+            name=""
             onChange={this.handleChange}
+            className="form-control search"
           />
-          <div className="input-group-append">
-            <span className="input-group-text">
+          <div className="input-group-prepend">
+            <span className="input-group-text search_btn">
               <FontAwesomeIcon icon={faSearch} />
             </span>
           </div>

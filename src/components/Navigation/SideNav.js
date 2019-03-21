@@ -38,45 +38,34 @@ class SideNav extends React.Component {
       return null;
     } else {
       return (
-        <div>
-          <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <div style={{ overflowY: "scroll" }}>
-              <li
-                className="nav-item"
-                data-toggle="tooltip"
-                data-placement="right"
-              >
-                <Link to="/create" className="nav-link heading">
-                  <span className="nav-link-text ">Channels</span>
-                  <FontAwesomeIcon icon={faPlusCircle} />
-                </Link>
-              </li>
-              <SearchBar />
-              {channelLinks}
+        <div class="card mb-sm-3 mb-md-0 contacts_card">
+          <div class="col-md-4 col-xl-3 chat">
+            <SearchBar />
+            <div className="card-body contacts_body">
+              <ul className="contacts">
+                <li className="active">
+                  <Link to="/create" className="nav-link heading">
+                    <span className="nav-link-text ">Channels</span>
+                    <FontAwesomeIcon icon={faPlusCircle} />
+                  </Link>
+                  <div className="d-flex bd-highlight">
+                    {/* <div className="img_cont"> */}
+                    {/* <img src="#" className="rounded-circle user_img" /> 
+                       <span className="online_icon" />
+                    </div> */}
+                    <div className="user_info">{channelLinks}</div>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </ul>
-          <ul className="navbar-nav sidenav-toggler">
-            <li className="nav-item">
-              <span
-                className="nav-link text-center"
-                id="sidenavToggler"
-                onClick={() =>
-                  this.setState(prevState => ({
-                    collapsed: !prevState.collapsed
-                  }))
-                }
-              >
-                <FontAwesomeIcon
-                  icon={this.state.collapsed ? faAngleRight : faAngleLeft}
-                />
-              </span>
-            </li>
-          </ul>
+            {/* <div className="card-footer" /> */}
+          </div>
         </div>
       );
     }
   }
 }
+
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
@@ -92,3 +81,24 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SideNav);
+
+{
+  /* <div className="card-body contacts_body">
+						<ul className="contacts">
+						<li className="active">
+							<div className="d-flex bd-highlight">
+								<div className="img_cont">
+									<img src="#" className="rounded-circle user_img">
+									<span className="online_icon"></span>
+								</div>
+								<div className="user_info">
+									<span>Maryam Naz</span>
+									<p>Maryam is online</p>
+								</div>
+							</div>
+						</li>
+						
+						</ul>
+					</div>
+					 */
+}

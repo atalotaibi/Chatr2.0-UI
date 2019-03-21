@@ -6,6 +6,7 @@ import MsgRow from "./MsgRow";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions";
 import MessageForm from "./MessageForm";
+import AuthButton from "./Navigation/AuthButton";
 
 class ChannelMsg extends Component {
   timer = "";
@@ -14,14 +15,14 @@ class ChannelMsg extends Component {
   };
   componentDidMount() {
     this.scrollToBottom();
-    this.timer = setInterval(
-      () =>
-        this.props.fetchChannelDetail(
-          this.props.match.params.channelID,
-          this.getLatestTimestamp()
-        ),
-      3000
+    // this.timer = setInterval(
+    //   () =>
+    this.props.fetchChannelDetail(
+      this.props.match.params.channelID,
+      this.getLatestTimestamp()
     );
+    //   3000
+    // );
   }
   componentDidUpdate(prevProps) {
     this.scrollToBottom();
@@ -35,7 +36,7 @@ class ChannelMsg extends Component {
             this.props.match.params.channelID,
             this.getLatestTimestamp()
           ),
-        3000
+        1000
       );
     }
   }
@@ -43,17 +44,6 @@ class ChannelMsg extends Component {
     let channel = this.props.channel;
     if (channel.length) return channel[channel.length - 1].timestamp;
     return "";
-    // if (!this.props.user) {
-    //   return null;
-    // } else {
-    //   if (this.props.channel) {
-    //     this.props.channel.forEach(msg => {
-    //       if (!!channel.lengh) {
-    //         this.setState({ timestamp: msg.timestamp });
-    //       }
-    //     });
-    //   }
-    // }
   };
   getView = () => {
     let msg = "";
@@ -61,20 +51,19 @@ class ChannelMsg extends Component {
       return null;
     } else {
       if (this.props.channel) {
-        console.log(this.props.channel.length);
         msg = this.props.channel.map(msg => <MsgRow key={msg.id} msg={msg} />);
       }
     }
-    return <tbody>{msg}</tbody>;
+    return msg;
   };
   render() {
     const channelID = this.props.match.params.channelID;
     return (
       <div>
-        <div className="MessageContainer">
-          <div className="MessagesList">
-            <table className="msg ml-3">{this.getView()}</table>
-          </div>
+        {/* <div className="card-body msg_card_body"> */}
+        <div className="d-flex justify-content-end mb-4">
+          {this.getView()}
+
           <div
             style={{ float: "left", clear: "both" }}
             ref={el => {
@@ -83,6 +72,7 @@ class ChannelMsg extends Component {
           />
           <MessageForm channelID={channelID} />
         </div>
+        {/* </div> */}
       </div>
     );
   }
@@ -106,3 +96,62 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ChannelMsg);
+
+{
+  /* <div className="col-md-8 col-xl-6 chat">
+					<div className="card">
+						<div className="card-header msg_head">
+							<div className="d-flex bd-highlight">
+								<div className="user_info">
+									<span>Channel name</span>
+								</div>
+								<div className="video_cam">
+									<span><i className="fas fa-video"></i></span>
+									<span><i className="fas fa-phone"></i></span>
+								</div>
+							</div>
+							<span id="action_menu_btn"><i className="fas fa-ellipsis-v"></i></span>
+							<div className="action_menu">
+								<ul>
+                <AuthButton />
+								</ul>
+							</div>
+						</div>
+						<div className="card-body msg_card_body">
+							<div className="d-flex justify-content-start mb-4">
+              {this.getView()}
+								</div>
+                <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+          <MessageForm channelID={channelID} />
+							</div> */
+}
+
+{
+  /* <div className="msg_cotainer">
+									Hi, how are you samim?
+									<span className="msg_time">8:40 AM, Today</span>
+								</div>
+							 */
+}
+
+{
+  /* <div>
+        <div classNameName="MessageContainer">
+          <div classNameName="MessagesList">
+            <table classNameName="msg ml-3">{this.getView()}</table>
+          </div>
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+          <MessageForm channelID={channelID} />
+        </div>
+      </div> */
+}
