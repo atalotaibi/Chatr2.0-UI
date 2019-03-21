@@ -12,7 +12,7 @@ class SearchBar extends Component {
   };
   render() {
     return (
-      <div className="form-group col-lg-6 col-12 mx-auto">
+      <div className="form-group col-lg-12 col-12 mx-auto ">
         <div className="input-group my-3">
           <input
             className="form-control"
