@@ -6,13 +6,13 @@ class Welcome extends Component {
     return (
       <header className="masthead d-flex">
         <div className="container text-center my-auto z-1">
-          <h1 className="mb-1">WELCOME TO CHATR</h1>
+          <h1 className="mb-1">WELCOME TO A&A chatting website</h1>
           <h3 className="mb-5">
-            <em>You're gonna need to login to see the messages</em>
+            <em>Enjoy</em>
           </h3>
-          <Link to="/login" className="btn btn-primary btn-lg">
+          {/* <Link to="/login" className="btn btn-primary btn-lg">
             Login
-          </Link>
+          </Link> */}
         </div>
         <div className="overlay z-0" />
       </header>

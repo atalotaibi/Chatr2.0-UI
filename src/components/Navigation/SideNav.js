@@ -55,23 +55,6 @@ class SideNav extends React.Component {
               </li>
             </div>
           </ul>
-          <ul className="navbar-nav sidenav-toggler">
-            <li className="nav-item">
-              <span
-                className="nav-link text-center"
-                id="sidenavToggler"
-                onClick={() =>
-                  this.setState(prevState => ({
-                    collapsed: !prevState.collapsed
-                  }))
-                }
-              >
-                <FontAwesomeIcon
-                  icon={this.state.collapsed ? faAngleRight : faAngleLeft}
-                />
-              </span>
-            </li>
-          </ul>
         </div>
       );
     }

@@ -163,6 +163,7 @@ body.fixed-nav {
 @media (min-width: 992px) {
   #mainNav .navbar-brand {
     width: 250px;
+    margin-bottom: auto;
   }
   #mainNav .navbar-collapse {
     overflow: visible;
@@ -341,6 +342,12 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
   overflow-x: hidden;
   background-image: url(https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png);
 }
+.footer1 {
+  position: fixed;
+  left: 301px;
+  bottom: 0px;
+  width: 79%;
+}
 
 @media (min-width: 992px) {
   .content-wrapper {
@@ -354,6 +361,11 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 .navbar-sidenav-tooltip.show {
   display: none;
+}
+
+.MessagesList {
+  margin-bottom: 52px;
+  margin-top: 50px;
 }
 
 @media (min-width: 992px) {

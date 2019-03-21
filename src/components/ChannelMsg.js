@@ -12,6 +12,7 @@ class ChannelMsg extends Component {
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
+
   componentDidMount() {
     this.scrollToBottom();
     this.timer = setInterval(
@@ -23,11 +24,19 @@ class ChannelMsg extends Component {
       3000
     );
   }
-  componentDidUpdate(prevProps) {
-    this.scrollToBottom();
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("[ChannelMsg.js] componentDidUpdate prevState: ", prevState);
+    console.log("[ChannelMsg.js] componentDidUpdate prevProps: ", prevProps);
+    let channel = this.props.channel;
+    if (channel.length !== prevProps.channel.length) {
+      this.scrollToBottom();
+    }
     if (
       this.props.match.params.channelID !== prevProps.match.params.channelID
     ) {
+      this.scrollToBottom();
+      this.props.resetChannel();
       clearInterval(this.timer);
       this.timer = setInterval(
         () =>
@@ -39,29 +48,19 @@ class ChannelMsg extends Component {
       );
     }
   }
+
   getLatestTimestamp = () => {
     let channel = this.props.channel;
     if (channel.length) return channel[channel.length - 1].timestamp;
     return "";
-    // if (!this.props.user) {
-    //   return null;
-    // } else {
-    //   if (this.props.channel) {
-    //     this.props.channel.forEach(msg => {
-    //       if (!!channel.lengh) {
-    //         this.setState({ timestamp: msg.timestamp });
-    //       }
-    //     });
-    //   }
-    // }
   };
+
   getView = () => {
     let msg = "";
     if (!this.props.user) {
       return null;
     } else {
       if (this.props.channel) {
-        console.log(this.props.channel.length);
         msg = this.props.channel.map(msg => <MsgRow key={msg.id} msg={msg} />);
       }
     }
@@ -71,7 +70,7 @@ class ChannelMsg extends Component {
     const channelID = this.props.match.params.channelID;
     return (
       <div>
-        <div className="MessageContainer">
+        <div className="MessageContainer text-break">
           <div className="MessagesList">
             <table className="msg ml-3">{this.getView()}</table>
           </div>
@@ -81,6 +80,8 @@ class ChannelMsg extends Component {
               this.messagesEnd = el;
             }}
           />
+        </div>
+        <div className="footer1">
           <MessageForm channelID={channelID} />
         </div>
       </div>
@@ -98,7 +99,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchChannelDetail: (channelID, timestamp) =>
-      dispatch(actionCreators.fetchChannelDetail(channelID, timestamp))
+      dispatch(actionCreators.fetchChannelDetail(channelID, timestamp)),
+    resetChannel: () => dispatch({ type: "RESET_CHANNEL" })
   };
 };
 

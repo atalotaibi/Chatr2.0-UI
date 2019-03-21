@@ -12,13 +12,20 @@ const reducer = (state = initialState, action) => {
         channel: state.channel.concat(action.payload)
       };
 
-    case actionTypes.POST_MESSAGE:
+    // case actionTypes.POST_MESSAGE:
+    //   console.log(action.payload);
+    //   return {
+    //     ...state,
+    //     channel: {
+    //       ...state.channel,
+    //       messages: state.channel.messages.concat(action.payload)
+    //     }
+    //   };
+
+    case actionTypes.RESET_CHANNEL:
       return {
         ...state,
-        channel: {
-          ...state.channel,
-          messages: state.channel.messages.concat(action.payload)
-        }
+        channel: []
       };
 
     default:

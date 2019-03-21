@@ -19,9 +19,13 @@ class ChannelNavLink extends Component {
             style={{ overflowX: "hidden" }}
           >
             <img
-              src={channel.image_url}
+              src={
+                channel.image_url
+                  ? channel.image_url
+                  : "http://allaboutwindowsphone.com/images/appicons/252288.png"
+              }
               className="chat-headAA"
-              alt={channel.name}
+              // alt={channel.name}
             />
             {channel.name.slice(0, 45)}
           </span>

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 class MsgRow extends Component {
   render() {
     const msg = this.props.msg;
-    console.log(msg.timestamp);
-    console.log(this.props.user);
     if (this.props.user.username === msg.username) {
       return (
         <div class="chat-bubble me">
