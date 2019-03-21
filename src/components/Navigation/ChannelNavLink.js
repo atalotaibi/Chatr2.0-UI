@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 // FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 class ChannelNavLink extends Component {
   render() {
@@ -16,8 +14,17 @@ class ChannelNavLink extends Component {
         title={channel.name}
       >
         <NavLink className="nav-link" to={`/channels/${channel.id}`}>
-          <FontAwesomeIcon icon={faHashtag} />
-          <span className="nav-link-text"> {channel.name}</span>
+          <span
+            className=" text-break nav-link-text"
+            style={{ overflowX: "hidden" }}
+          >
+            <img
+              src={channel.image_url}
+              className="chat-headAA"
+              alt={channel.name}
+            />
+            {channel.name.slice(0, 45)}
+          </span>
         </NavLink>
       </li>
     );

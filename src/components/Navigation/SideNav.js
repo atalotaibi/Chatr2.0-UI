@@ -49,10 +49,10 @@ class SideNav extends React.Component {
                 <Link to="/create" className="nav-link heading">
                   <span className="nav-link-text ">Channels</span>
                   <FontAwesomeIcon icon={faPlusCircle} />
+                  <SearchBar style={{ overflowY: "fixed" }} />
+                  {channelLinks}
                 </Link>
               </li>
-              <SearchBar />
-              {channelLinks}
             </div>
           </ul>
           <ul className="navbar-nav sidenav-toggler">
