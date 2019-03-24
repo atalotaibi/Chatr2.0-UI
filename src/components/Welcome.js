@@ -6,6 +6,7 @@ class Welcome extends Component {
     return (
       <header className="masthead d-flex">
         <div className="container text-center my-auto z-1">
+          <br /> <br /> <br /> <br /> <br /> <br />
           <h1 className="mb-1">WELCOME TO A&A chatting website</h1>
           <h3 className="mb-5">
             <em>Enjoy</em>

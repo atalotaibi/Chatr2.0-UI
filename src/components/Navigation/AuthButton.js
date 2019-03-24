@@ -28,16 +28,18 @@ class AuthButton extends Component {
     ];
 
     if (user) {
-      buttons = (
+      buttons = [
+        <li className="nav-item">
+          <span className="navbar-text">{user.username}</span>
+        </li>,
         <li className="nav-item">
           <span className="nav-link" onClick={() => this.props.logout()}>
-            <span className="navbar-text">{user.username}</span>
             <Link to="/login" className="nav-link">
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </Link>
           </span>
         </li>
-      );
+      ];
     }
 
     return <ul className="navbar-nav ml-auto">{buttons}</ul>;
